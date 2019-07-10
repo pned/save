@@ -1,0 +1,17 @@
+window.getFunctions = (obj, nogo = []) => {
+    let keyList = Object.keys(obj);
+    const functionList = {};
+
+    keyList.forEach((key) => {
+      if (!nogo.includes(key)) {
+        if (typeof(obj[key]) === 'object' && obj[key]) {
+          const flist = getFunctions(obj[key]);
+          functionList[key]= flist;
+        } else if (obj[key]) {
+          functionList[key] = obj[key].toString();
+        }
+      }
+    });
+
+    return functionList;
+  };
